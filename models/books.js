@@ -1,16 +1,26 @@
-module.exports = app => {
-  return {
-    findAll: (params, callback) => {
-      return callback([
-        {
-          title: 'An astronaut\'s guide to life on earth',
-          author: 'Col. Chris Hadfield'
-        },
-        {
-          title: 'Cat\'s cradle',
-          author: 'Kurt Vonnegut'
-        }
-      ])
+module.exports = (sequelize, DataType) => {
+  const Books = sequelize.define("Books", {
+    id: {
+      type: DataType.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    title: {
+      type: DataType.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    author: {
+      type: DataType.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
     }
-  }
-}
+  }, {
+    timestamps: false
+  });
+  return Books;
+};
