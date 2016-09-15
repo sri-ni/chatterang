@@ -2,6 +2,7 @@ module.exports = app => {
   const Books = app.db.models.Books;
 
   app.route('/books')
+    .all(app.auth.authenticate())
     .get((req, res) => {
       Books.findAll({})
         .then(result => res.json(result))
@@ -18,6 +19,7 @@ module.exports = app => {
     });
 
   app.route('/books/:id')
+    .all(app.auth.authenticate())
     .get((req, res) => {
       Books.findOne({where: req.params})
         .then(result => {
