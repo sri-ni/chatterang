@@ -2,6 +2,14 @@ module.exports = app => {
   const Clients = app.db.models.Clients;
 
   app.route('/clients')
+    .all(app.auth.authenticate())
+    .all((req, res, next) => {
+      if (req.user.name !== 'admin') {
+        res.sendStatus(401);
+      } else {
+        next();
+      }
+    })
     .get((req, res) => {
       Clients.findAll({})
       .then(result => res.json(result))
