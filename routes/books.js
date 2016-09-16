@@ -3,6 +3,27 @@ module.exports = app => {
 
   app.route('/books')
     .all(app.auth.authenticate())
+    /**
+     * @api {get} /books List all the books
+     * @apiGroup Books
+     * @apiHeader {String} Authorization Token of authenticated user
+     * @apiHeaderExample {json} Header
+     *    {"Authorization": "JWT xyz.abc.123.hgf"}
+     * @apiSuccess {Object[]} books Book's list
+     * @apiSuccess {Number} books.id Book ID
+     * @apiSuccess {String} books.title Book Title
+     * @apiSuccess {Boolean} books.author Book Author
+     * @apiSuccessExample {json} Success
+     *    HTTP/1.1 200 OK
+     *    [{
+     *      "id": 1,
+     *      "title": "Creativity, Inc.",
+     *      "author": "Ed Catmull"
+     *    }]
+     * @apiError 412 Some required pre-condition failed
+     * @apiErrorExample {json} Book error
+     *    HTTP/1.1 412 Precondition Failed
+     */
     .get((req, res) => {
       Books.findAll({})
         .then(result => res.json(result))
