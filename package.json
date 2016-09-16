@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run apidoc && babel-node index.js",
+    "test": "NODE_ENV=test mocha test/**/*.js",
     "apidoc": "apidoc -i routes/ -o public/apidoc"
   },
   "apidoc": {
@@ -32,6 +33,10 @@
     "sequelize": "^3.19.2"
   },
   "devDependencies": {
-    "apidoc": "^0.15.1"
+    "apidoc": "^0.15.1",
+    "babel-register": "^6.5.2",
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
   }
 }
