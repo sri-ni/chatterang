@@ -7,7 +7,7 @@ module.exports = app => {
      * @api {get} /books List all the books
      * @apiGroup Books
      * @apiVersion 0.0.1
-     * @apiHeader {String} Authorization Token of authenticated user
+     * @apiHeader {String} Authorization Token of authenticated client
      * @apiHeaderExample {json} Header
      *    {"Authorization": "JWT xyz.abc.123.hgf"}
      * @apiSuccess {Object[]} books Book's list
@@ -35,7 +35,7 @@ module.exports = app => {
      * @api {post} /books Add a new book
      * @apiGroup Books
      * @apiVersion 0.0.1
-     * @apiHeader {String} Authorization Token of authenticated user
+     * @apiHeader {String} Authorization Token of authenticated client
      * @apiHeaderExample {json} Header
      *    {"Authorization": "JWT xyz.abc.123.hgf"}
      * @apiParam {String} title Book title
@@ -72,7 +72,7 @@ module.exports = app => {
      * @api {get} /books/:id Retrieve a book
      * @apiGroup Books
      * @apiVersion 0.0.1
-     * @apiHeader {String} Authorization Token of authenticated user
+     * @apiHeader {String} Authorization Token of authenticated client
      * @apiHeaderExample {json} Header
      *    {"Authorization": "JWT xyz.abc.123.hgf"}
      * @apiParam {id} id Book ID
@@ -108,7 +108,7 @@ module.exports = app => {
      * @api {put} /books/:id Update a Book
      * @apiGroup Books
      * @apiVersion 0.0.1
-     * @apiHeader {String} Authorization Token of authenticated user
+     * @apiHeader {String} Authorization Token of authenticated client
      * @apiHeaderExample {json} Header
      *    {"Authorization": "JWT xyz.abc.123.hgf"}
      * @apiParam {id} id Book ID
@@ -135,7 +135,7 @@ module.exports = app => {
      * @api {delete} /books/:id Remove a Book
      * @apiGroup Books
      * @apiVersion 0.0.1
-     * @apiHeader {String} Authorization Token of authenticated user
+     * @apiHeader {String} Authorization Token of authenticated client
      * @apiHeaderExample {json} Header
      *    {"Authorization": "JWT xyz.abc.123.hgf"}
      * @apiParam {id} id Book ID
