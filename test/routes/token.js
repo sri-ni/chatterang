@@ -1,20 +1,22 @@
 describe('Routes: Token', () => {
   const Clients = app.db.models.Clients;
   describe('POST /token', () => {
+
     beforeEach(done => {
       Clients
         .destroy({where:{}})
         .then(() => Clients.create({
-          name: 'app test',
+          name: 'app test 5',
           secret: 'password'
         }))
         .then(done());
     });
+
     describe('status 200', () => {
       it('returns authenticated client token', done => {
         request.post('/token')
           .send({
-            name: 'app test',
+            name: 'app test 5',
             secret: 'password'
           })
           .expect(200)
@@ -28,7 +30,7 @@ describe('Routes: Token', () => {
       it('throws error when secret is incorrect', done => {
         request.post("/token")
           .send({
-            name: "app test",
+            name: "app test 5",
             secret: "WRONG_PASSWORD"
           })
           .expect(401)
