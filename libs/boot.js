@@ -5,5 +5,11 @@ module.exports = app => {
         console.log(`savantory-books microservice - port ${app.get('port')}`);
       });
     });
+  } else {
+    app.db.sequelize.sync().done(() => {
+      app.listen(app.get('port'), () => {
+        // nothing
+      });
+    });
   }
 };
