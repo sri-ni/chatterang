@@ -2,6 +2,7 @@ import bodyParser from 'body-parser';
 import compression from "compression";
 import cors from 'cors';
 import express from 'express';
+import helmet from 'helmet';
 import logger from './logger';
 import morgan from 'morgan';
 
@@ -15,6 +16,7 @@ module.exports = app => {
       }
     }
   }));
+  app.use(helmet());
   app.use(cors({
     origin: ['*'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
