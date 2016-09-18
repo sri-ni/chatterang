@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import MetaInspector from 'node-metainspector';
+import validator from 'validator';
 
 module.exports = app => {
 
@@ -7,6 +8,7 @@ module.exports = app => {
     .post((req, res) => {
       let mentions = [];
       let emoticons = [];
+      let links = [];
       let lenToken;
 
       const incomingMessage = req.body.message;
@@ -20,24 +22,22 @@ module.exports = app => {
           lenToken = token.length;
           emoticons.push(token.substring(1,lenToken-1));
         }
+        if (validator.isURL(token)){
+          links.push(token);
+        }
       });
 
       console.log('mentions = ', mentions);
       console.log('emoticons = ', emoticons);
+      console.log('links = ', links);
 
       res.status(200).json({
         'mentions': mentions,
-        'emoticons': emoticons
+        'emoticons': emoticons,
+        'links': links
       });
 
-      // TODO: find if token has some semblance of link
-
-      //   if starts with http or https or ends with some dot notation,
-
-
-      //     make request call, get title
-      //     if no title just use the text itself as title
-      //     make the link with http if not https explicitly
+      // get title and cleaned URL
       // const url = req.body.url;
       // console.log('\nreq.body.url = ', url);
       //
