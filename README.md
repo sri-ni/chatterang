@@ -1,8 +1,5 @@
-# Savantory - Books Microservice
-This project is a learning exercise in building micro-services and more for the savantory project.
-
-## Savantory project
-It is meant for those passionate about books, love reading and do it as a habit.
+# chatterang API service
+This project is an API service for building a chat application.
 
 ## The technology stack will include the following.
 - node JS

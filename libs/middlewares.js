@@ -7,7 +7,7 @@ import logger from './logger';
 import morgan from 'morgan';
 
 module.exports = app => {
-  app.set('port', 3000);
+  app.set('port', 3001);
   app.set('json spaces', 2);
   app.use(morgan('common', {
     stream: {

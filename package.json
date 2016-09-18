@@ -1,7 +1,7 @@
 {
-  "name": "savantory-books",
+  "name": "chatterang",
   "version": "0.0.1",
-  "description": "Microservice for Books data with CRUD capabilities for admin.",
+  "description": "API Service for enabling Chat Applications.",
   "main": "index.js",
   "scripts": {
     "start": "npm run apidoc && npm run clusters",
@@ -10,14 +10,14 @@
     "apidoc": "apidoc -i routes/ -o public/apidoc"
   },
   "apidoc": {
-    "name": "savantory-books API Documentation",
+    "name": "chatterang API Documentation",
     "template": {
       "forceLanguage": "en"
     }
   },
   "keywords": [
-    "books",
-    "reading"
+    "chat",
+    "collaboration"
   ],
   "author": "Thirumalaa Srinivas",
   "dependencies": {
