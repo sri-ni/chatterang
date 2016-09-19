@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import MetaInspector from 'node-metainspector';
 import validator from 'validator';
+import { getUrlInfo } from '../modules/urlinfo';
 
 module.exports = app => {
 
@@ -9,6 +9,8 @@ module.exports = app => {
       let mentions = [];
       let emoticons = [];
       let links = [];
+      let linkPromises = [];
+      let parsedLinks = [];
       let lenToken;
 
       const incomingMessage = req.body.message;
@@ -31,36 +33,34 @@ module.exports = app => {
       console.log('emoticons = ', emoticons);
       console.log('links = ', links);
 
-      res.status(200).json({
-        'mentions': mentions,
-        'emoticons': emoticons,
-        'links': links
+      links.forEach(function(link){
+        linkPromises.push(getUrlInfo(link));
       });
 
-      // get title and cleaned URL
-      // const url = req.body.url;
-      // console.log('\nreq.body.url = ', url);
-      //
-      // let client = new MetaInspector(url, {
-      //   timeout: 5000
-      // });
-      //
-      // client.on('fetch', function(){
-      //   console.log('Title: ' + client.title);
-      //   let title = client.title || url;
-      //   let resUrl = client.url || 'http://'+url;
-      //   res.status(200).json({
-      //     'title': title,
-      //     'url': resUrl
-      //   });
-      // });
-      //
-      // client.on('error', function(err){
-      //   console.log(err);
-      //   res.status(500).json({msg: err.code});
-      // });
-      //
-      // client.fetch();
+      Promise.all(linkPromises).then(function(linkArr){
+        linkArr.forEach(function(link) {
+          if (link.errno || link.code) {
+            console.log('returned promise error = ', link.host || link.hostname);
+          } else {
+            console.log('returned promise info = ',
+              _.trim(link.title), link.url);
+            parsedLinks.push({
+              'title': _.trim(link.title) || link.url,
+              'url': link.url
+            });
+          }
+        });
+        res.status(200).json({
+          'mentions': mentions,
+          'emoticons': emoticons,
+          'links': parsedLinks
+        });
+      })
+      // TODO: need to handle this gracefully
+      .catch(function(error) {
+        console.log('Other errors = ', error);
+      });
+
     });
 
 };
