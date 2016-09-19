@@ -7,6 +7,7 @@ export function getUrlInfo(url) {
     });
 
     client.on('fetch', function(){
+      client.url = client.url || url;
       resolve(client);
     });
 

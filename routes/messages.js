@@ -12,26 +12,34 @@ module.exports = app => {
       let linkPromises = [];
       let parsedLinks = [];
       let lenToken;
+      let mention;
+      let emoticon;
+      let title;
 
       const incomingMessage = req.body.message;
       let splitupMessage = incomingMessage.split(' ');
 
+      // TODO: handling repeated mentions, emoticons, links
       splitupMessage.forEach((token) => {
         if (_.startsWith(token, '@')) {
-          mentions.push(token.substring(1));
+          mention = token.substring(1);
+          // mention = mention.replace(/[^a-zA-Z0-9]*$/g, '');
+          mention = mention.split(/[^A-Za-z0-9]/)[0];
+          // if (!mention.search(/^[a-zA-Z0-9]+$/)) {
+          if (mention.length) {
+            mentions.push(mention);
+          }
         }
         if (_.startsWith(token, '(') && _.endsWith(token, ')')) {
-          lenToken = token.length;
-          emoticons.push(token.substring(1,lenToken-1));
+          emoticon = _.trim(token, '()');
+          if (!emoticon.search(/^[a-zA-Z0-9]+$/) && emoticon.length <= 15) {
+            emoticons.push(emoticon);
+          }
         }
         if (validator.isURL(token)){
           links.push(token);
         }
       });
-
-      console.log('mentions = ', mentions);
-      console.log('emoticons = ', emoticons);
-      console.log('links = ', links);
 
       links.forEach(function(link){
         linkPromises.push(getUrlInfo(link));
@@ -40,13 +48,15 @@ module.exports = app => {
       Promise.all(linkPromises).then(function(linkArr){
         linkArr.forEach(function(link) {
           if (link.errno || link.code) {
-            console.log('returned promise error = ', link.host || link.hostname);
+            console.log('returned promise error = ', link);
           } else {
-            console.log('returned promise info = ',
-              _.trim(link.title), link.url);
+            title = _.trim(link.title) ||
+              _.trimStart(link.url, 'http://') ||
+              _.trimStart(link.title, 'https://');
+            title = _.trimEnd(title, '/');
             parsedLinks.push({
-              'title': _.trim(link.title) || link.url,
-              'url': link.url
+              'url': link.url,
+              'title': title
             });
           }
         });
@@ -56,9 +66,22 @@ module.exports = app => {
           'links': parsedLinks
         });
       })
-      // TODO: need to handle this gracefully
       .catch(function(error) {
         console.log('Other errors = ', error);
+        parsedLinks = [];
+        links.forEach(function(url) {
+          url = (!url.search(/^(http:\/\/)/) ||
+            !url.search(/^(https:\/\/)/))? url: 'http://'+url;
+          parsedLinks.push({
+            'url': url,
+            'title': _.trimStart(link.title, 'http://') || _.trimStart(link.title, 'https://')
+          });
+        });
+        res.status(200).json({
+          'mentions': mentions,
+          'emoticons': emoticons,
+          'links': parsedLinks
+        });
       });
 
     });
