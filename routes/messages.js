@@ -42,6 +42,8 @@ module.exports = app => {
      *        }
      *      ]
      *    }
+     * @apiSuccessExample {json} No Parsed Content
+     *    HTTP/1.1 204 No Content
      * @apiErrorExample {json} Messages error
      *    HTTP/1.1 400 Bad Request
      */
