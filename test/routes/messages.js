@@ -118,6 +118,24 @@ describe('Routes: Messages', () => {
               done(err);
             });
         });
+        it('checks for links with trailing special characters', done => {
+          request.post('/messages')
+            .send({message: 'twitter.com/ga%%$^; google.com.&%#'})
+            .expect(200)
+            .end((err, res) => {
+              expect(res.body.links).to.have.length(2);
+              done(err);
+            });
+        });
+        it('checks for unique links', done => {
+          request.post('/messages')
+            .send({message: 'twitter.com/ga%%$^; tw.cc https://twitter.com/jdorfman/status/430511497475670016 tw.cc*&^ http://bankofamerica.com bankofamerica.c https://www.google.com google.com.&%# bankofamerica.com http://google.com https://bankofamerica.com'})
+            .expect(200)
+            .end((err, res) => {
+              expect(res.body.links).to.have.length(5);
+              done(err);
+            });
+        });
       });
 
       describe('Test --All--', () => {
