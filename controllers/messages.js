@@ -6,17 +6,18 @@ import { getEmoticon } from '../modules/emoticon';
 import { getUrlTitle } from '../modules/urltitle';
 
 export function messageParse(req, res) {
-  let mentions = [];
+  let emoticon;
   let emoticons = [];
+  let lenToken;
   let links = [];
   let linkPromises = [];
-  let parsedLinks = [];
-  let lenToken;
   let mention;
-  let emoticon;
+  let mentions = [];
+  let parsedLinks = [];
+  let resultObj;
   let title;
-
   const incomingMessage = req.body.message;
+
   if (!_.trim(incomingMessage)) {
     res.sendStatus(400);
   }
@@ -51,7 +52,7 @@ export function messageParse(req, res) {
         });
       }
     });
-    let resultObj = _.assign(
+    resultObj = _.assign(
       {},
       (mentions.length)? {'mentions': mentions} : {},
       (emoticons.length)? {'emoticons': emoticons} : {},
