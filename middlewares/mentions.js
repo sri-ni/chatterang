@@ -11,5 +11,9 @@ export function parseMentions(req, res, next) {
     }
   });
 
+  if (req.mentions.length) {
+    req.mentions = _.uniq(req.mentions);
+  }
+
   next();
 }

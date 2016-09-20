@@ -57,7 +57,11 @@ module.exports = app => {
           (req.emoticons.length)? {'emoticons': req.emoticons} : {},
           (req.parsedLinks.length)? {'links': req.parsedLinks} : {}
         );
-        res.status(200).json(resultObj);
+        if (_.isEmpty(resultObj)) {
+          res.sendStatus(204);
+        } else {
+          res.status(200).json(resultObj);
+        }
       }
     );
 
