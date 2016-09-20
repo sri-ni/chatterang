@@ -4,11 +4,11 @@ import consign from 'consign';
 const app = express();
 
 consign({verbose: false})
-  .include('libs/config.js')
-  .then('db.js')
-  .then('auth.js')
-  .then('libs/middlewares.js')
-  .then('routes')
+  // .include('libs/config.js')
+  // .then('db.js')
+  // .then('auth.js')
+  .include('libs/middlewares.js')
+  .then('routes/messages.js')
   .then('libs/boot.js')
   .into(app);
 
