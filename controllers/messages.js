@@ -6,6 +6,7 @@ import { getEmoticon } from '../modules/emoticon';
 import { getUrlTitle } from '../modules/urltitle';
 
 export function messageParse(req, res) {
+  const incomingMessage = req.body.message;
   let emoticon;
   let emoticons = [];
   let lenToken;
@@ -15,14 +16,14 @@ export function messageParse(req, res) {
   let mentions = [];
   let parsedLinks = [];
   let resultObj;
+  let splitupMessage;
   let title;
-  const incomingMessage = req.body.message;
 
   if (!_.trim(incomingMessage)) {
     res.sendStatus(400);
   }
 
-  let splitupMessage = incomingMessage.split(' ');
+  splitupMessage = incomingMessage.split(' ');
 
   // TODO: handling repeated mentions, emoticons, links
   splitupMessage.forEach((token) => {
