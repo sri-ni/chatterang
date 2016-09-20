@@ -17,7 +17,7 @@ export function messageParse(req, res) {
   let title;
 
   const incomingMessage = req.body.message;
-  if (!incomingMessage) {
+  if (!_.trim(incomingMessage)) {
     res.sendStatus(400);
   }
 
