@@ -2,8 +2,8 @@
 This project is an API service for building a chat application.
 
 ## Install
-git clone https://github.com/sri-ni/chatterang.git
-npm Install
+`git clone https://github.com/sri-ni/chatterang.git`
+`npm Install`
 
 ## Usage
 
