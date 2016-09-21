@@ -1,5 +1,7 @@
 # chatterang API service
 This project is an API service for building a chat application.
+### [Wiki reference](https://github.com/sri-ni/chatterang/wiki) 
+Contains elaborate documentation on design thoughts and decisions.
 
 ## Install
 `git clone https://github.com/sri-ni/chatterang.git`
@@ -21,14 +23,3 @@ To download **postman** go [here](https://www.getpostman.com/).
 
 ### Run tests
 `npm run test`
-
-
-## Tech Stack
-- nodeJS
-- mocha, chai and supertest
-- babel
-- es6/es7
-- apidocJS
-- ssl cert & https
-- mysql
-- sequelize
