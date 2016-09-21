@@ -3,6 +3,7 @@ This project is an API service for building a chat application.
 
 ## Install
 `git clone https://github.com/sri-ni/chatterang.git`
+
 `npm Install`
 
 ## Usage
@@ -15,7 +16,7 @@ The API can be used by importing this [postman collection](https://www.getpostma
 To download **postman** go [here](https://www.getpostman.com/).
 
 ### API documentation
-Start the server and goto https://localhost:3001/apidoc/ to access the API documentation.
+Start the server and goto [apidoc](https://localhost:3001/apidoc/) to access the API documentation.
 
 ### Run tests
 `npm run test`
@@ -26,6 +27,7 @@ Start the server and goto https://localhost:3001/apidoc/ to access the API docum
 - mocha, chai and supertest
 - babel
 - es6/es7
+- apidocJS
 - ssl cert & https
 - mysql
 - sequelize
