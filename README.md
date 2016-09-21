@@ -16,7 +16,8 @@ The API can be used by importing this [postman collection](https://www.getpostma
 To download **postman** go [here](https://www.getpostman.com/).
 
 ### API documentation
-Start the server and goto [apidoc](https://localhost:3001/apidoc/) to access the API documentation.
+- Start the server 
+- Goto [https://localhost:3001/apidoc/](https://localhost:3001/apidoc/) to access the API documentation.
 
 ### Run tests
 `npm run test`
