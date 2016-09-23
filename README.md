@@ -6,7 +6,7 @@ Contains elaborate documentation on design thoughts and decisions.
 ## Install
 `git clone https://github.com/sri-ni/chatterang.git`
 
-`npm Install`
+`npm install`
 
 ## Usage
 
