@@ -1,4 +1,4 @@
-export function mapReduceUniqueUrls(urls) {
+export function ensureUniqueUrls(urls) {
   let links = [];
   let linksMap = [];
   let scheme;

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export function checkSplit(req, res, next) {
+export function messageCheckSplit(req, res, next) {
   const incomingMessage = req.body.message;
   if (!_.trim(incomingMessage)) {
     res.sendStatus(400);

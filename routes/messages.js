@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import validator from 'validator';
 import { messageParse } from '../controllers/messages';
-import { checkSplit } from '../middlewares/messages';
+import { messageCheckSplit } from '../middlewares/messages';
 import { parseMentions } from '../middlewares/mentions';
 import { parseEmoticons } from '../middlewares/emoticons';
 import { parseLinks } from '../middlewares/links';
@@ -48,7 +48,7 @@ module.exports = app => {
      *    HTTP/1.1 400 Bad Request
      */
     .post(
-      checkSplit,
+      messageCheckSplit,
       parseMentions,
       parseEmoticons,
       parseLinks,

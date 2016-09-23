@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { getUrlInfo } from '../modules/urlinfo';
 import { getUrlTitle } from '../modules/urltitle';
-import { mapReduceUniqueUrls } from '../modules/urlshelpers';
+import { ensureUniqueUrls } from '../modules/urlshelpers';
 
 export function parseLinks(req, res, next) {
   let links = [];
@@ -20,7 +20,7 @@ export function parseLinks(req, res, next) {
 
   if (links.length) {
     links = _.uniq(links);
-    links = mapReduceUniqueUrls(links);
+    links = ensureUniqueUrls(links);
 
     links.forEach(function(link){
       linkPromises.push(getUrlInfo(link));
