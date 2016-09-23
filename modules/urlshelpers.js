@@ -4,10 +4,8 @@ export function mapReduceUniqueUrls(urls) {
   let scheme;
 
   urls.forEach(function(link){
-    scheme = null;
-    if (link.indexOf('http://')!==-1) scheme = 'http://';
+    scheme = 'http://';
     if (link.indexOf('https://')!==-1) scheme = 'https://';
-    if (!scheme) scheme = 'http://';
     link = link.replace(/(^http:\/\/|^https:\/\/)/,'');
     link = link.replace(/(^www.)/,'');
     if ((linksMap[link] && scheme==='https://')

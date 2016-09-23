@@ -13,14 +13,14 @@ export function parseLinks(req, res, next) {
 
   req.splitupMessage.forEach((token) => {
     if (token.match(urlRegex)){
-      token = token.replace(/[\W]+$/,''); // remove trailing special characters
+      token = token.replace(/[\W]+$/,'');
       links.push(token);
     }
   });
 
   if (links.length) {
-    links = _.uniq(links); // first pass on uniqueness
-    links = mapReduceUniqueUrls(links); // second custom pass on uniqueness
+    links = _.uniq(links);
+    links = mapReduceUniqueUrls(links);
 
     links.forEach(function(link){
       linkPromises.push(getUrlInfo(link));

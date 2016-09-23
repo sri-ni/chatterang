@@ -7,7 +7,7 @@
     "startnodes": "npm run apidoc && npm run clusters",
     "start": "npm run apidoc && babel-node index.js",
     "clusters": "babel-node clusters.js",
-    "test": "NODE_ENV=test mocha -t 5000 test/**/messages.js",
+    "test": "NODE_ENV=test mocha -t 10000 test/**/messages.js",
     "apidoc": "apidoc -f routes/messages.js -o public/apidoc"
   },
   "apidoc": {
